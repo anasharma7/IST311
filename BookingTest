@@ -1,0 +1,21 @@
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+public class BookingTest {
+
+    // Test case to verify that the Booking object has the correct traveler, origin airport, destination airport, and travel date values
+    @Test
+    public void testBookingObjectValues() {
+        Traveller traveller = new Traveller("John", "Doe", "US1234567");
+        Airport origin = new Airport("JFK", "John F. Kennedy International Airport");
+        Airport destination = new Airport("LAX", "Los Angeles International Airport");
+        String travelDate = "2023-05-20";
+        Booking booking = new Booking(traveller, origin, destination, travelDate);
+        assertEquals(traveller, booking.getTraveller());
+        assertEquals(origin, booking.getOrigin());
+        assertEquals(destination, booking.getDestination());
+        assertEquals(travelDate, booking.getTravelDate());
+    }
+
+    // Additional test cases can be added to verify other methods or edge cases of the Booking class
+}

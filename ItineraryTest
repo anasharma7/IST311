@@ -1,0 +1,42 @@
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+
+public class ItineraryTest {
+
+    @Test
+    void testItineraryConstructor() {
+        // Create a booking
+        Traveller traveller = new Traveller("John", "Doe", "johndoe@gmail.com");
+        Airport originAirport = new Airport("ABC", "Airport1");
+        Airport destAirport = new Airport("XYZ", "Airport2");
+        LocalDateTime travelDate = LocalDateTime.now();
+        Booking booking = new Booking(traveller, originAirport, destAirport, travelDate);
+
+        // Create an itinerary with a single flight
+        Flight flight = new Flight("F001", originAirport, destAirport, travelDate, travelDate.plusHours(2));
+        ArrayList<Flight> flights = new ArrayList<>();
+        flights.add(flight);
+        Itinerary itinerary = new Itinerary(booking, flights);
+
+        // Verify that the itinerary has the correct booking and flight values
+        assertEquals(booking, itinerary.getBooking());
+        assertEquals(flights, itinerary.getFlights());
+    }
+
+    @Test
+    void testItineraryConstructorInvalidInput() {
+        // Create a booking
+        Traveller traveller = new Traveller("John", "Doe", "johndoe@gmail.com");
+        Airport originAirport = new Airport("ABC", "Airport1");
+        Airport destAirport = new Airport("XYZ", "Airport2");
+        LocalDateTime travelDate = LocalDateTime.now();
+        Booking booking = new Booking(traveller, originAirport, destAirport, travelDate);
+
+        // Create an itinerary with an empty list of flights
+        ArrayList<Flight> flights = new ArrayList<>();
+        assertThrows(IllegalArgumentException.class, () -> new Itinerary(booking, flights));
+    }
+}

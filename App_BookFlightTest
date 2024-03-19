@@ -1,0 +1,50 @@
+import org.junit.Test;
+import java.util.List;
+
+import static org.junit.Assert.*;
+
+public class App_BookFlightTest {
+
+    @Test
+    public void testGenerateMultipleRoutes() {
+        // Create an instance of the App_BookFlight class
+        App_BookFlight app = new App_BookFlight();
+
+        // Call the generateMultipleRoutes method with a valid input
+        List<Itinerary> itineraries = app.generateMultipleRoutes("JFK", "LAX", "2023-06-01");
+git push -u origin main
+
+        // Verify that the method returns a list of valid itineraries
+        assertFalse(itineraries.isEmpty());
+        for (Itinerary itinerary : itineraries) {
+            assertNotNull(itinerary);
+            assertTrue(itinerary.getFlights().size() > 0);
+            assertNotNull(itinerary.getTotalFare());
+            assertNotNull(itinerary.getTotalTravelTime());
+        }
+    }
+
+    @Test
+    public void testBookTicket() {
+        // Create an instance of the App_BookFlight class
+        App_BookFlight app = new App_BookFlight();
+
+        // Call the generateMultipleRoutes method with a valid input
+        List<Itinerary> itineraries = app.generateMultipleRoutes("JFK", "LAX", "2023-06-01");
+
+        // Verify that the method returns a list of valid itineraries
+        assertFalse(itineraries.isEmpty());
+
+        // Select the first itinerary and call the bookTicket method with a valid input
+        Itinerary itinerary = itineraries.get(0);
+        Booking booking = app.bookTicket(itinerary.getOriginAirport().getCode(),
+                                          itinerary.getDestinationAirport().getCode(),
+                                          itinerary.getFlights().get(0).getDepartureDateTime().toString());
+
+        // Verify that the method books the ticket and returns the correct itinerary with a fare amount
+        assertNotNull(booking);
+        assertEquals(booking.getItinerary(), itinerary);
+        assertNotNull(booking.getConfirmationCode());
+        assertNotNull(booking.getFareAmount());
+    }
+}

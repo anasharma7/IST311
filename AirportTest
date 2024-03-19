@@ -1,0 +1,57 @@
+import org.junit.Test;
+import static org.junit.Assert.*;
+
+public class AirportTest {
+    private static final String AIRPORT_CODE = "JFK";
+    private static final String AIRPORT_NAME = "John F. Kennedy International Airport";
+    private static final String AIRPORT_CODE2 = "LAX";
+    private static final String AIRPORT_NAME2 = "Los Angeles International Airport";
+
+    @Test
+    public void testAirportConstructor() {
+        Airport airport = new Airport(AIRPORT_CODE, AIRPORT_NAME);
+        assertNotNull(airport);
+        assertEquals(AIRPORT_CODE, airport.getAirportCode());
+        assertEquals(AIRPORT_NAME, airport.getAirportName());
+
+        Airport airport2 = new Airport(AIRPORT_CODE2, AIRPORT_NAME2);
+        assertNotNull(airport2);
+        assertEquals(AIRPORT_CODE2, airport2.getAirportCode());
+        assertEquals(AIRPORT_NAME2, airport2.getAirportName());
+    }
+
+    @Test
+    public void testAirportCodeAndName() {
+        // Test case to ensure airport code and name are not null or empty and are correctly associated with each other
+        String invalidCode = "";
+        String invalidName = "";
+        String validCode = "YYZ";
+        String validName = "Toronto Pearson International Airport";
+
+        try {
+            Airport airport = new Airport(invalidCode, invalidName);
+            fail("Airport code and name should not be empty");
+        } catch (IllegalArgumentException e) {
+            assertEquals("Airport code and name should not be empty", e.getMessage());
+        }
+
+        try {
+            Airport airport = new Airport(validCode, invalidName);
+            fail("Airport name should not be empty");
+        } catch (IllegalArgumentException e) {
+            assertEquals("Airport name should not be empty", e.getMessage());
+        }
+
+        try {
+            Airport airport = new Airport(invalidCode, validName);
+            fail("Airport code should not be empty");
+        } catch (IllegalArgumentException e) {
+            assertEquals("Airport code should not be empty", e.getMessage());
+        }
+
+        Airport airport = new Airport(validCode, validName);
+        assertNotNull(airport);
+        assertEquals(validCode, airport.getAirportCode());
+        assertEquals(validName, airport.getAirportName());
+    }
+}

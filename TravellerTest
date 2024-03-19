@@ -1,0 +1,26 @@
+import org.junit.Test;
+import static org.junit.Assert.*;
+
+public class TravellerTest {
+
+    @Test
+    public void testTravellerConstructor() {
+        Traveller traveller = new Traveller("John Doe", "1234");
+        assertEquals("John Doe", traveller.getName());
+        assertEquals("1234", traveller.getID());
+    }
+
+    @Test
+    public void testSetName() {
+        Traveller traveller = new Traveller("John Doe", "1234");
+        traveller.setName("Jane Doe");
+        assertEquals("Jane Doe", traveller.getName());
+    }
+
+    @Test
+    public void testSetID() {
+        Traveller traveller = new Traveller("John Doe", "1234");
+        traveller.setID("5678");
+        assertEquals("5678", traveller.getID());
+    }
+}
